@@ -42,7 +42,7 @@ module.exports.loop = function () {
 
     if(collectors.length < 3) {
         var newName = 'collector' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
+        Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
             {memory: {role: 'collector'}});        
     }
     
@@ -53,7 +53,7 @@ module.exports.loop = function () {
     if(upgraders.length < 2) {
         var newName = 'upgrader' + Game.time;
         //console.log('Spawning new upgrader: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
+        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE], newName,
             {memory: {role: 'upgrader'}});        
     }
     
@@ -61,7 +61,7 @@ module.exports.loop = function () {
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     //console.log('Harvesters: ' + harvesters.length);
 
-    if(builders.length < 3) {
+    if(builders.length < 2) {
         var newName = 'builder' + Game.time;
         //console.log('Spawning new upgrader: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE], newName,
@@ -82,7 +82,7 @@ module.exports.loop = function () {
 
     if(wall_maintainers.length < 1) {
         var newName = 'wall_maintainer' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName,
+        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,CARRY,CARRY,MOVE,MOVE], newName,
             {memory: {role: 'wall_maintainer'}});        
     }
     
