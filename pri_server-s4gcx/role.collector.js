@@ -48,7 +48,8 @@ var roleCollector = {
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_CONTAINER) &&
+                    return (structure.structureType == STRUCTURE_CONTAINER 
+                    || structure.structureType == STRUCTURE_STORAGE) &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
@@ -58,6 +59,21 @@ var roleCollector = {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
+            
+            // else {
+            //     var targets = creep.room.find(FIND_STRUCTURES, {
+            //         filter: (structure) => {
+            //             return (structure.structureType == STRUCTURE_STORAGE) &&
+            //                 structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+            //         }
+            //     });
+                
+            //     if(targets) {
+            //         if(creep.transfer(targets[0]) == ERR_NOT_IN_RANGE) {
+            //             creep.moveTo(target[0]);
+            //         }
+            //     }
+            // }
         }
     }
 };

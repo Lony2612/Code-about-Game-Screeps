@@ -24,7 +24,7 @@ module.exports.loop = function () {
     if(harvesters.length < 2) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE], newName,
+        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE], newName,
             {memory: {role: 'harvester'}});        
     }
     
@@ -33,7 +33,7 @@ module.exports.loop = function () {
 
     if(carriers.length < 3) {
         var newName = 'carrier' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,MOVE,MOVE,MOVE], newName,
+        Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
             {memory: {role: 'carrier'}});        
     }
     
@@ -42,7 +42,7 @@ module.exports.loop = function () {
 
     if(collectors.length < 3) {
         var newName = 'collector' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
+        Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
             {memory: {role: 'collector'}});        
     }
     
@@ -50,10 +50,10 @@ module.exports.loop = function () {
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     //console.log('Harvesters: ' + harvesters.length);
 
-    if(upgraders.length < 2) {
+    if(upgraders.length < 1) {
         var newName = 'upgrader' + Game.time;
         //console.log('Spawning new upgrader: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE], newName,
+        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
             {memory: {role: 'upgrader'}});        
     }
     
@@ -97,24 +97,24 @@ module.exports.loop = function () {
     // }
     
     
-    if(Game.spawns['Spawn1'].spawning) {
-        var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
-        Game.spawns['Spawn1'].room.visual.text(
-            '🛠️' + spawningCreep.memory.role,
-            Game.spawns['Spawn1'].pos.x + 1,
-            Game.spawns['Spawn1'].pos.y,
-            {align: 'left', opacity: 0.8});
-    }
+    // if(Game.spawns['Spawn1'].spawning) {
+    //     var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
+    //     Game.spawns['Spawn1'].room.visual.text(
+    //         '🛠️' + spawningCreep.memory.role,
+    //         Game.spawns['Spawn1'].pos.x + 1,
+    //         Game.spawns['Spawn1'].pos.y,
+    //         {align: 'left', opacity: 0.8});
+    // }
     
-    // var towers = Game.rooms['E8S1'].find(
-    //     FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
+    var towers = Game.rooms['E8S1'].find(
+        FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
         
-    // if(towers) {
+    if(towers) {
         
-    //     var closestHostile = towers[0].pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-    //     if(closestHostile) {
-    //         towers.forEach(tower => tower.attack(closestHostile));
-    //     }
+        var closestHostile = towers[0].pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if(closestHostile) {
+            towers.forEach(tower => tower.attack(closestHostile));
+        }
         
         // else {
         //     var closestDamagedStructure = towers[0].pos.findClosestByRange(FIND_STRUCTURES, {
@@ -125,6 +125,7 @@ module.exports.loop = function () {
         //         towers.forEach(tower => tower.repair(closestDamagedStructure));
         //     }
         // }
+    }
 
         
 
