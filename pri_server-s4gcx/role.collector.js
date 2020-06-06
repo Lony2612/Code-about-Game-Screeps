@@ -19,7 +19,7 @@ var roleCollector = {
         
         if(!creep.memory.collecting && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.collecting = true;
-            creep.say('🔄 collecte');
+            //creep.say('🔄 collecte');
         }
         if(creep.memory.collecting && creep.store.getFreeCapacity() == 0) {
             creep.memory.collecting = false;
@@ -28,52 +28,23 @@ var roleCollector = {
         
         if(creep.memory.collecting) {
             
-            // const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
-            // if(target) {
-            //     if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
-            //         creep.moveTo(target);
-            //     }
-            // }
+            let linkTo = Game.getObjectById('5eda082f42f75d094f32b918');
             
-            var drops = creep.room.find(FIND_DROPPED_RESOURCES);
-            if(drops) {
-                chosen = 0//random(0,drops.length)
-                if(creep.pickup(drops[chosen]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(drops[chosen]);
+            if(linkTo.store.getCapacity(RESOURCE_ENERGY) > 0) {
+                if(creep.withdraw(linkTo, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(linkTo, {visualizePathStyle: {stroke: '#ffaa00'}});
                 }
             }
-            
         }
         
         else {
-            var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_CONTAINER 
-                    || structure.structureType == STRUCTURE_STORAGE) &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-                }
-            });
             
-            if(targets.length > 0) {
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-                }
+            let target = Game.getObjectById('5ed84c5142f75d094f325fb4');
+            
+            if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
             }
             
-            // else {
-            //     var targets = creep.room.find(FIND_STRUCTURES, {
-            //         filter: (structure) => {
-            //             return (structure.structureType == STRUCTURE_STORAGE) &&
-            //                 structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-            //         }
-            //     });
-                
-            //     if(targets) {
-            //         if(creep.transfer(targets[0]) == ERR_NOT_IN_RANGE) {
-            //             creep.moveTo(target[0]);
-            //         }
-            //     }
-            // }
         }
     }
 };

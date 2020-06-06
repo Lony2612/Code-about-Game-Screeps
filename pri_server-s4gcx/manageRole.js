@@ -7,10 +7,23 @@
  * mod.thing == 'a thing'; // true
  */
 
+var roleHarvester = require('role.harvester');
+var roleUpgrader = require('role.upgrader');
+var roleBuilder = require('role.builder');
+var roleRepairer = require('role.repairer');
+var roleCarrier  = require('role.carrier');
+var roleDefender = require('role.defender');
+var roleCollector = require('role.collector');
+var roleWallmaintainer = require('role.wall_maintainer')
+var roleTransporter = require('role.transporter')
+
 var manageRole = {
 
     /** @param {None} none **/
     run: function() {
+        
+        // var energySpawn = 0;
+        // spawnAndExtension = 
         
         // check the number of harvester //
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
@@ -19,14 +32,14 @@ var manageRole = {
         if(harvesters.length < 2) {
             var newName = 'Harvester' + Game.time;
             console.log('Spawning new harvester: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
                 {memory: {role: 'harvester'}});        
         }
         
         // check the number of carrier //
         var carriers = _.filter(Game.creeps, (creep) => creep.memory.role == 'carrier');
     
-        if(carriers.length < 3) {
+        if(carriers.length < 2) {
             var newName = 'carrier' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
                 {memory: {role: 'carrier'}});        
@@ -35,10 +48,19 @@ var manageRole = {
         // check the number of collector //
         var collectors = _.filter(Game.creeps, (creep) => creep.memory.role == 'collector');
     
-        if(collectors.length < 3) {
+        if(collectors.length < 1) {
             var newName = 'collector' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,MOVE], newName,
                 {memory: {role: 'collector'}});        
+        }
+        
+        // check the number of transporter //
+        var transporters = _.filter(Game.creeps, (creep) => creep.memory.role == 'transporter');
+    
+        if(transporters.length < 1) {
+            var newName = 'transporter' + Game.time;
+            Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
+                {memory: {role: 'transporter'}});        
         }
         
         // check the number of upgrader //
@@ -48,7 +70,7 @@ var manageRole = {
         if(upgraders.length < 1) {
             var newName = 'upgrader' + Game.time;
             //console.log('Spawning new upgrader: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
                 {memory: {role: 'upgrader'}});        
         }
         
@@ -56,7 +78,7 @@ var manageRole = {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         //console.log('Harvesters: ' + harvesters.length);
     
-        if(builders.length < 2) {
+        if(builders.length < 1) {
             var newName = 'builder' + Game.time;
             //console.log('Spawning new upgrader: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE], newName,

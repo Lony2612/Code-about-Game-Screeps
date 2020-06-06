@@ -19,7 +19,7 @@ var roleUpgrader = {
         
         if(!creep.memory.upgrading && creep.store.getFreeCapacity() == 0) {
             creep.memory.upgrading = true;
-            creep.say('🚧 upgrade');
+            //creep.say('🚧 upgrade');
         }
         
         if(creep.memory.upgrading) {
@@ -41,7 +41,7 @@ var roleUpgrader = {
             var containers = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_CONTAINER) &&
-                        structure.store.getCapacity(RESOURCE_ENERGY) > 0;
+                        structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
             

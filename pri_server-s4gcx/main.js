@@ -1,4 +1,3 @@
-
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
@@ -7,6 +6,7 @@ var roleCarrier  = require('role.carrier');
 var roleDefender = require('role.defender');
 var roleCollector = require('role.collector');
 var roleWallmaintainer = require('role.wall_maintainer')
+var roleTransporter = require('role.transporter')
 
 var manageRole = require('manageRole')
 
@@ -21,15 +21,7 @@ module.exports.loop = function () {
     
     manageRole.run()
     
-    // if(Game.spawns['Spawn1'].spawning) {
-    //     var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
-    //     Game.spawns['Spawn1'].room.visual.text(
-    //         '🛠️' + spawningCreep.memory.role,
-    //         Game.spawns['Spawn1'].pos.x + 1,
-    //         Game.spawns['Spawn1'].pos.y,
-    //         {align: 'left', opacity: 0.8});
-    // }
-    
+    // tower
     var towers = Game.rooms['E8S1'].find(
         FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
         
@@ -49,6 +41,17 @@ module.exports.loop = function () {
         //         towers.forEach(tower => tower.repair(closestDamagedStructure));
         //     }
         // }
+    }
+    
+    // link
+    let linkTo = Game.getObjectById('5eda082f42f75d094f32b918');
+    let linkFrom = Game.getObjectById('5eda0946c0e847095c5a32c2');
+    
+    if(linkTo && linkFrom) {
+        // console.log('exist', linkFrom.store.getFreeCapacity(RESOURCE_ENERGY));
+        if(linkFrom.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
+            linkFrom.transferEnergy(linkTo);
+        }
     }
 
         
@@ -78,6 +81,9 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'wall_maintainer') {
             roleWallmaintainer.run(creep);
+        }
+        if(creep.memory.role == 'transporter') {
+            roleTransporter.run(creep);
         }
     }
 }

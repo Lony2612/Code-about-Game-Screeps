@@ -43,13 +43,13 @@ var roleRepairer = {
             
             var containers = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_CONTAINER) &&
-                        structure.store.getCapacity(RESOURCE_ENERGY) > 0;
+                    return (structure.structureType == STRUCTURE_STORAGE) &&
+                        structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
             
-            if(creep.withdraw(containers[2], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(containers[2], {visualizePathStyle: {stroke: '#ffaa00'}});
+            if(creep.withdraw(containers[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(containers[0], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
             
             
