@@ -17,6 +17,8 @@ var roleCollector = require('role.collector');
 var roleWallmaintainer = require('role.wall_maintainer')
 var roleTransporter = require('role.transporter')
 
+var spawnNames = ['Spawn1', 'Spawn2'];
+
 var manageRole = {
 
     /** @param {None} none **/
@@ -26,13 +28,24 @@ var manageRole = {
         // spawnAndExtension = 
         
         // check the number of harvester //
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+        var harvesters = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester') && (creep.room.name == 'E8S1'));
         //console.log('Harvesters: ' + harvesters.length);
     
         if(harvesters.length < 2) {
             var newName = 'Harvester' + Game.time;
             console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
+                {memory: {role: 'harvester'}});        
+        }
+        
+        // check the number of harvester in room2 //
+        var harvester2s = _.filter(Game.creeps, (creep) => (creep.memory.role == 'harvester') && (creep.room.name == 'E9S1') );
+        //console.log('Harvesters: ' + harvesters.length);
+    
+        if(harvester2s.length < 2) {
+            var newName = 'Harvester2' + Game.time;
+            console.log('Spawning new harvester2: ' + newName);
+            Game.spawns['Spawn2'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newName,
                 {memory: {role: 'harvester'}});        
         }
         
@@ -43,6 +56,15 @@ var manageRole = {
             var newName = 'carrier' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
                 {memory: {role: 'carrier'}});        
+        }
+        
+        // check the number of carrier in room2 //
+        var carrier2s = _.filter(Game.creeps, (creep) => creep.memory.role == 'carrier2');
+    
+        if(carrier2s.length < 2) {
+            var newName = 'carrier2' + Game.time;
+            Game.spawns['Spawn2'].spawnCreep([CARRY,CARRY,MOVE,MOVE], newName,
+                {memory: {role: 'carrier2'}});        
         }
         
         // check the number of collector //
@@ -64,13 +86,24 @@ var manageRole = {
         }
         
         // check the number of upgrader //
-        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+        var upgraders = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader') && (creep.room.name == 'E8S1'));
         //console.log('Harvesters: ' + harvesters.length);
     
         if(upgraders.length < 1) {
             var newName = 'upgrader' + Game.time;
             //console.log('Spawning new upgrader: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
+                {memory: {role: 'upgrader'}});        
+        }
+        
+        // check the number of upgrader in room2 //
+        var upgrader2s = _.filter(Game.creeps, (creep) => (creep.memory.role == 'upgrader') && (creep.room.name == 'E9S1'));
+        //console.log('Harvesters: ' + harvesters.length);
+    
+        if(upgrader2s.length < 2) {
+            var newName = 'upgrader2' + Game.time;
+            //console.log('Spawning new upgrader: ' + newName);
+            Game.spawns['Spawn2'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE], newName,
                 {memory: {role: 'upgrader'}});        
         }
         
@@ -95,12 +128,59 @@ var manageRole = {
         }
         
         // check the number of repairer //
+        var repairer2s = _.filter(Game.creeps, (creep) => (creep.memory.role == 'repairer') && (creep.room.name == 'E9S1'));
+    
+        if(repairer2s.length < 1) {
+            var newName = 'repairer2' + Game.time;
+            Game.spawns['Spawn2'].spawnCreep([WORK,CARRY,MOVE], newName,
+                {memory: {role: 'repairer'}});        
+        }
+        
+        // check the number of repairer //
         var wall_maintainers = _.filter(Game.creeps, (creep) => creep.memory.role == 'wall_maintainer');
     
         if(wall_maintainers.length < 1) {
             var newName = 'wall_maintainer' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,CARRY,CARRY,MOVE,MOVE], newName,
                 {memory: {role: 'wall_maintainer'}});        
+        }
+        
+        // // check the number of repairer //
+        // var claimers = _.filter(Game.creeps, (creep) => creep.memory.role == 'claimer');
+    
+        // if(claimers.length < 1) {
+        //     var newName = 'claimer' + Game.time;
+        //     Game.spawns['Spawn1'].spawnCreep([CLAIM,CLAIM,MOVE,MOVE], newName,
+        //         {memory: {role: 'claimer'}});        
+        // }
+        
+        // check the number of repairer //
+        var soldiers = _.filter(Game.creeps, (creep) => creep.memory.role == 'soldier');
+    
+        if(soldiers.length < 1) {
+            var newName = 'soldier' + Game.time;
+            Game.spawns['Spawn1'].spawnCreep([TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
+                {memory: {role: 'soldier'}});        
+        }
+        
+        // check the number of remotebuilder //
+        var remotebuilders = _.filter(Game.creeps, (creep) => creep.memory.role == 'remotebuilder');
+    
+        if(remotebuilders.length < 0) {
+            var newName = 'remotebuilder' + Game.time;
+            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+                MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
+                {memory: {role: 'remotebuilder'}});        
+        }
+        
+        // check the number of remotebuilder //
+        var remoteupgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'remoteupgrader');
+    
+        if(remoteupgraders.length < 1) {
+            var newName = 'remoteupgrader' + Game.time;
+            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+                MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], newName,
+                {memory: {role: 'remoteupgrader'}});        
         }
         
         // // check the number of defender //
