@@ -13,7 +13,7 @@ var roomNameSpawn = {'E8S1':'Spawn1', 'E9S1':'Spawn2'};
 var roomNames = ['E8S1', 'E9S1'];
 var roleNames = ['harvester', 'builder', 'carrier', 'claimer', 'collector', 'defender', 
     'remotebuilder', 'remotetransporter', 'remoteupgrader', 'repairer', 'soldier', 'transporter',
-    'upgrader', 'wall_maintainer', 'scout', 'remoteharvester', 'remoterepairer'];
+    'upgrader', 'wall_maintainer', 'scout', 'remoteharvester', 'remoterepairer', 'miner'];
 const roomNameValue = {'E8S1':1, 'E9S1':2};
 
 const numberOfRole = {
@@ -21,13 +21,13 @@ const numberOfRole = {
         'E8S1': 2, 'E9S1': 2
     }, 
     'builder': {
-        'E8S1': 1, 'E9S1': 2
-    }, 
-    'carrier': {
         'E8S1': 2, 'E9S1': 2
     }, 
+    'carrier': {
+        'E8S1': 3, 'E9S1': 2
+    }, 
     'claimer': {
-        'E8S1': 1, 'E9S1': 0
+        'E8S1': 0, 'E9S1': 0
     }, 
     'collector': {
         'E8S1': 1, 'E9S1': 0
@@ -39,7 +39,7 @@ const numberOfRole = {
         'E8S1': 0, 'E9S1': 0
     }, 
     'remotetransporter': {
-        'E8S1': 2, 'E9S1': 0
+        'E8S1': 0, 'E9S1': 0
     }, 
     'remoteupgrader': {
         'E8S1': 0, 'E9S1': 0
@@ -60,12 +60,15 @@ const numberOfRole = {
         'E8S1': 1, 'E9S1': 0
     },
     'scout': {
-        'E8S1': 1, 'E9S1': 0
+        'E8S1': 0, 'E9S1': 0
     },
     'remoteharvester': {
-        'E8S1': 1, 'E9S1': 0
+        'E8S1': 0, 'E9S1': 0
     },
     'remoterepairer': {
+        'E8S1': 0, 'E9S1': 0
+    },
+    'miner': {
         'E8S1': 1, 'E9S1': 0
     }
 }
@@ -80,9 +83,10 @@ const partOfRole = {
         'E9S1': [WORK,CARRY,CARRY,MOVE,MOVE]
     }, 
     'carrier': {
-        'E8S1': [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], 
+        'E8S1': [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], 
         // 'E8S1': [CARRY,CARRY,MOVE,MOVE], 
-        'E9S1': [CARRY,CARRY,MOVE,MOVE]
+        // 'E8S1': [CARRY,MOVE], 
+        'E9S1': [CARRY,CARRY,CARRY,MOVE,MOVE,MOVE]
     }, 
     'claimer': {
         'E8S1': [CLAIM,CLAIM,MOVE,MOVE], 
@@ -118,7 +122,7 @@ const partOfRole = {
         'E9S1': [WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]
     }, 
     'soldier': {
-        'E8S1': [TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK], 
+        'E8S1': [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,HEAL,HEAL], 
         'E9S1': [TOUGH,ATTACK,MOVE,MOVE]
     }, 
     'transporter': {
@@ -134,15 +138,20 @@ const partOfRole = {
         'E9S1': [WORK,CARRY,MOVE,MOVE]
     },
     'scout': {
-        'E8S1': [MOVE,MOVE], 
+        'E8S1': [MOVE], 
         'E9S1': [MOVE]
     },
     'remoteharvester': {
-        'E8S1': [WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], 
+        'E8S1': [WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], 
         'E9S1': [MOVE]
     },
     'remoterepairer': {
         'E8S1': [WORK,WORK,CARRY,CARRY,MOVE,MOVE], 
+        'E9S1': [MOVE]
+    },
+    'miner': {
+        'E8S1': [WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], 
         'E9S1': [MOVE]
     }
 }

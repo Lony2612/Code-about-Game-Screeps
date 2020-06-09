@@ -25,7 +25,8 @@ var roles = {
     'scout': require('role.scout'),
     'remoteharvester': require('role.remoteharvester'),
     'remotetransporter': require('role.remotetransporter'),
-    'remoterepairer': require('role.remoterepairer')
+    'remoterepairer': require('role.remoterepairer'),
+    'miner': require('role.miner')
 };
 
 module.exports = {

@@ -1,20 +1,3 @@
-// var roleHarvester = require('role.harvester');
-// var roleUpgrader = require('role.upgrader');
-// var roleBuilder = require('role.builder');
-// var roleRepairer = require('role.repairer');
-// var roleCarrier  = require('role.carrier');
-// var roleDefender = require('role.defender');
-// var roleCollector = require('role.collector');
-// var roleWallmaintainer = require('role.wall_maintainer')
-// var roleTransporter = require('role.transporter')
-
-// var roleRemoteBuilder = require('role.remotebuilder')
-// var roleSoldier = require('role.soldier')
-// var roleClaimer = require('role.claimer')
-// var roleCarrier2 = require('role.carrier2')
-// var roleRemoteUpgrader = require('role.remoteupgrader')
-// var roleScout = require('role.scout')
-
 var manageRole = require('manageRole2')
 var runRole = require('runRole')
 
@@ -76,13 +59,23 @@ module.exports.loop = function () {
     // link
     let linkTo = Game.getObjectById('5eda082f42f75d094f32b918');
     let linkFrom = Game.getObjectById('5eda0946c0e847095c5a32c2');
+    let linkFrom2 = Game.getObjectById('5edf1c102fbfc309555956a4');
     
-    if(linkTo && linkFrom) {
-        // console.log('exist', linkFrom.store.getFreeCapacity(RESOURCE_ENERGY));
-        if(linkFrom.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
-            linkFrom.transferEnergy(linkTo);
-        }
+    if(linkFrom.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
+        linkFrom.transferEnergy(linkTo);
     }
+    if(linkFrom2.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
+        linkFrom2.transferEnergy(linkTo);
+    }
+    // if(linkTo && linkFrom && linkFrom2) {
+    //     // console.log('exist', linkFrom.store.getFreeCapacity(RESOURCE_ENERGY));
+    //     if(linkFrom.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
+    //         linkFrom.transferEnergy(linkTo);
+    //     }
+    //     if(linkFrom2.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
+    //         linkFrom2.transferEnergy(linkTo);
+    //     }
+    // }
 
     runRole.run();    
 

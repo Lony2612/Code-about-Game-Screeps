@@ -14,8 +14,8 @@ module.exports = {
         const roomName = creep.room.name;
         // console.log(roomName);
         // 如果该房间不存在就先往房间走
-        if (roomName != 'E9S1') {
-            creep.moveTo(new RoomPosition(17, 29, 'E9S1'))
+        if (roomName != 'E7S1') {
+            creep.moveTo(new RoomPosition(17, 29, 'E7S1'))
         }
         
         // 如果房间存在了就说明已经进入了该房间
@@ -25,6 +25,10 @@ module.exports = {
             if(creep.attack(enermy) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(enermy);
             }
+        }
+        
+        if(creep.hits < creep.hitsMax) {
+            creep.heal(creep);
         }
         
     }

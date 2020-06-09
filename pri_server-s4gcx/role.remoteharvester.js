@@ -18,8 +18,13 @@ module.exports = {
             creep.memory.harvesting = false;
             //creep.say('🚧 transfer');
         }
+        const room = creep.room.name;
+        // 如果该房间不存在就先往房间走
+        if (room != 'E7S1') {
+            creep.moveTo(new RoomPosition(5, 23, 'E7S1'));
+        }
         
-        let emergency = Game.rooms['E7S1'].find(FIND_HOSTILE_CREEPS).length > 0;
+        let emergency = false;//Game.rooms['E7S1'].find(FIND_HOSTILE_CREEPS).length > 0;
         if(emergency) {
             creep.moveTo(Game.flags.AwayFromInvader);
         }
@@ -39,12 +44,7 @@ module.exports = {
                 }
             }
             else {
-                let target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_CONTAINER) &&
-                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-                    }
-                });
+                let target = Game.getObjectById('5edf1c102fbfc309555956a4');
                 
                 if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
