@@ -69,7 +69,7 @@ const numberOfRole = {
         'E8S1': 0, 'E9S1': 0
     },
     'miner': {
-        'E8S1': 1, 'E9S1': 0
+        'E8S1': 0, 'E9S1': 0
     }
 }
 
